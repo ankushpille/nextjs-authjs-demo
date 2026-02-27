@@ -14,14 +14,12 @@ Production-ready authentication and authorization demo built with Next.js App Ro
    - `npm install`
 2. Create `.env.local` from the template:
    - Copy `.env.local.example` to `.env.local` and fill values.
-3. Generate a strong `NEXTAUTH_SECRET` (e.g., 32+ random bytes).
-4. Run the dev server:
+3. Run the dev server:
    - `npm run dev`
 
 **Environment Variables**
 Template: `.env.local.example`
 ```text
-NEXTAUTH_SECRET=
 NEXTAUTH_URL=http://localhost:3000
 ```
 
