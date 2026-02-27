@@ -1,17 +1,29 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
-import Google from "next-auth/providers/google";
-
-const isAdminEmail = (email: string | null | undefined) => {
-  if (!email) return false;
-  // Demo rule: treat "@example.com" emails as admins.
-  return email.toLowerCase().endsWith("@example.com");
-};
+import CredentialsProvider from "next-auth/providers/credentials";
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        const email = credentials?.email;
+        const password = credentials?.password;
+
+        if (email === "admin@test.com" && password === "123456") {
+          return {
+            id: "1",
+            name: "Admin User",
+            email: "admin@test.com",
+            role: "admin"
+          };
+        }
+
+        return null;
+      }
     })
   ],
   secret: process.env.NEXTAUTH_SECRET,
@@ -22,8 +34,8 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     // Persist a demo role on the JWT.
     async jwt({ token, user }) {
-      if (user?.email) {
-        token.role = isAdminEmail(user.email) ? "admin" : "user";
+      if (user) {
+        token.role = (user as { role?: "admin" | "user" }).role ?? "user";
       }
       return token;
     },

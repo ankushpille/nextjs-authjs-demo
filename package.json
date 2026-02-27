@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "next": "latest",
-    "next-auth": "latest",
+    "next-auth": "^4.24.0",
     "react": "latest",
     "react-dom": "latest"
   },
