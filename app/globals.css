@@ -1,0 +1,42 @@
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #f6f7fb;
+  color: #10121a;
+}
+
+main {
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 24px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(16, 18, 26, 0.08);
+}
+
+button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #111827;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: #ffffff;
+  color: #111827;
+}
+
+img.avatar {
+  border-radius: 999px;
+  border: 2px solid #e5e7eb;
+}

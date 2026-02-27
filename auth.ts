@@ -8,7 +8,13 @@ const isAdminEmail = (email: string | null | undefined) => {
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  providers: [Google],
+  providers: [
+    Google({
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!
+    })
+  ],
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     // Use stateless JWTs so no database is required.
     strategy: "jwt"
