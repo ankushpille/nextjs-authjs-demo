@@ -1,7 +1,8 @@
-import { auth } from "../../auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth";
 
 export default async function DashboardPage() {
-  const session = await auth();
+  const session = await getServerSession(authOptions);
 
   return (
     <section>

@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthOptions } from "next-auth";
 import Google from "next-auth/providers/google";
 
 const isAdminEmail = (email: string | null | undefined) => {
@@ -7,7 +7,7 @@ const isAdminEmail = (email: string | null | undefined) => {
   return email.toLowerCase().endsWith("@example.com");
 };
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -34,5 +34,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return session;
     }
+  },
+  pages: {
+    signIn: "/"
   }
-});
+};
+
+export default NextAuth(authOptions);
